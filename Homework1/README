@@ -1,6 +1,6 @@
 #Homework1
 For problem1, the default setup will perform implicit simulation. To change to explicit simulation, please comment out the implicit section and uncomment explicit section.(implicit/explicit sections are marked inside the code)
 
-For problem2, intial code contains the two loop that changes dt and number of nodes and plot them against the terminal velocity. For question1 of problem2, please comment out 'change of number of nodes change' section as marked and set dtt to be [1e-2]
+For problem2, intial code contains the two loop that changes dt and number of nodes and plot them against the terminal velocity. For question1 of problem2, please comment out 'change of number of nodes' section as marked and set dtt to be [1e-2]
 
 For problem3, the code is set up for P=2000, change P=20000 for part 2 of the question
