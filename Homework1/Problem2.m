@@ -1,6 +1,6 @@
 clear all
-NN = [3,11,21,51,101];% Number of nodes
-dtt = [10,1,1e-1,5e-2,1e-2]; % second - Time step size
+NN = [3,7,11,21,101];% Number of nodes
+dtt = [40,20,5,1e-1,1e-2]; % second - Time step size
 final_v_n = zeros(5);
 final_v_t = zeros(5);
 
@@ -149,7 +149,7 @@ for c = 2:Nsteps
     u0 = u;
 end
 
-final_v_n(cc) = u(end);
+final_v_n(cc) = all_mid_v(end);
 % figure(1);
 % plot( q(1:2:end), q(2:2:end), 'ro-');
 % axis equal
@@ -162,7 +162,7 @@ end
 
 % Plot middle node downward velocity
 figure(1);
-plot(NN, final_v_n, 'k-');
+plot(NN, final_v_n(:,1), 'k-');
 xlabel('Number of Nodes');
 ylabel('Number of Nodes vs. Terminal Velocity [m/s]');
 
@@ -312,7 +312,7 @@ for c = 2:Nsteps
     u0 = u;
 end
 
-final_v_t(cc) = u(end);
+final_v_t(cc) = all_mid_v(end);
 % figure(1);
 % plot( q(1:2:end), q(2:2:end), 'ro-');
 % axis equal
@@ -325,7 +325,7 @@ end
 
 % Plot middle node downward velocity
 figure(2);
-plot(dtt, final_v_t, 'k-');
+plot(dtt, final_v_t(:,1), 'k-');
 xlabel('Time Step [s]');
 ylabel('Time Step [s] vs. Terminal Velocity [m/s]');
 
