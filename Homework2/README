@@ -1,1 +1,5 @@
-Code
+The code for simulation is provided in Problem1.m 
+Please alter the timespan, timestep, number of nodes, and other physical parameters on the top "Parameter" section.
+
+Acknowledgement:
+Many of the function called in the simulation are borrowed or altered from the class 6 code.
