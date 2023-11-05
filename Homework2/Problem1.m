@@ -5,6 +5,7 @@ global Fg M dt
 global kappaBar EI GJ voronoiLength
 global EA refL
 
+%% Parameters
 %Physical parameters
 l = 0.2; %rod length
 rn = 0.02; %natural curve
@@ -14,7 +15,7 @@ Y = 10e6; %Young's
 G = Y/3; %shear modulus
 g = -9.81; %gravitational constant
 
-%% Stifness variables
+% Stifness variables
 EI = Y * pi * r0^4 / 4; % Bending stiffness
 GJ = G * pi * r0^4/2; % Shearing stiffness
 EA = Y * pi * r0^2; % Stretching stiffness
@@ -26,8 +27,9 @@ dtheta = (l/rn)*(1/(n-1));
 T=5; %total time of simulation
 fixed = 1:7; %index for two nodes and first angle
 free = 8:4*n-1;
+tol=1/Y;
 
-%Initializing q
+%% Initializing q
 q = zeros(4*n-1,1); %stores [x1,y1,z1, theta1 to xn,yn,zn]
 k=1;
 for i=1:4:4*n %compute initial rod position
@@ -38,7 +40,7 @@ end
 q0 = q;
 u = zeros(4*n-1,1);
 
-% get reference length 
+%% get reference length 
 refL = zeros(n-1, 1);
 for i=1:n-1 % loop over each edge
  dx = q(i*4+1:i*4+3) - q(i*4-3:i*4-1); %distance vector from xi to xi-1
@@ -57,7 +59,7 @@ for c=1:n
  end
 end
 
-%initialize time parallel frame 
+%% initialize time parallel frame 
 a1 = zeros(n-1, 3); % First reference director
 a2 = zeros(n-1, 3); 
 tangent = computeTangent(q); % calculate tangent for all edges
@@ -81,7 +83,7 @@ for i=2:n-1
  a2(i,:) = cross(t1, a1(i,:));
 end
 
-% get material frame
+%% get material frame
 theta = q(4:4:4*n-3); 
 [m1, m2] = computeMaterialDirectors(a1, a2, theta);
 
@@ -91,7 +93,7 @@ refTwist = zeros(n, 1);
 %% Natural curvature
 kappaBar = getkappa( q, m1, m2 ); % Natural curvature at each node
 
-% weight assignment
+%% weight assignment
 % given rod, only edge has weight
 Mv = zeros(4*n-1, 1);
 totalM = pi*r0^2*l*rho; 
@@ -117,8 +119,7 @@ for i=3:4:4*n-1
     Fg(i) =Mv(i)*g;
 end
 
-tol=1/Y;
-%Numerical steps
+%% Numerical steps
 for k = 1:T/dt
  fprintf('Current time = %f\n', k*dt);
  [q, u, a1, a2] = objfun(q0, u, a1, a2, free, tol, refTwist);
@@ -155,7 +156,7 @@ for k = 1:T/dt
 end
 
 figure(2)
-%plot the z position of the last node across time
+%% Plotting the z position of the last node across time
 plot(0:dt:T-dt,z,'*--') 
 title('Z position of last node across time')
 xlabel('Time(s)')
