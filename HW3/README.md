@@ -1,0 +1,1 @@
+The HW3.pdf is the report for HW3. By opening and running project_505947745.m, the model will train on default hyper-parameters(Epoch=150, Learning Rate = 0.01, Number of Layers = 2) and print out the final test accuracy along with a graph showcasing the change of test accuracy of total loss across epochs.
