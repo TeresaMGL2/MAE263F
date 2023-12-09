@@ -1,0 +1,1 @@
+folder src and robotDescription.cpp contains the necessary files to run the specialized DisMech simulation. Follow the instruction on https://github.com/StructuresComp/dismech-rods for how to install Dismech.
